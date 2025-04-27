@@ -12,8 +12,8 @@ export default function FilmCardInList({ film }) {
         className="picture"
       />
       <div className="rating">
-        <Icon path={mdiStarShootingOutline} size={1} />
-        <div>{film.rating.kp}</div>
+        <Icon path={mdiStarShootingOutline} size={1}/>
+        <div>{film.rating.kp.toFixed(2)}</div>
       </div>
     </div>
   );
