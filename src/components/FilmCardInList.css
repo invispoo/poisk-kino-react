@@ -1,0 +1,32 @@
+.card {
+  display: grid;
+  grid-template-rows: 1.5fr 9fr 1.5fr;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+.title {
+  font-weight: bold;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Ограничение по количеству строк */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.picture {
+  justify-self: center;
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0.5rem 0;
+}
+
+.rating {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: 0.5rem;
+}
