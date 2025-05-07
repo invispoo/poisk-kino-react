@@ -1,3 +1,1 @@
-export default function FilmCard () {
-
-}
+export default function FilmCard() {}
