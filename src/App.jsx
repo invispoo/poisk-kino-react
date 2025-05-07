@@ -1,10 +1,12 @@
 import "./App.css";
 import FilmList from "@features/film-list";
+import Search from "@components/search";
 
 function App() {
   return (
     <>
-      <FilmList></FilmList>
+      <Search />
+      <FilmList />
     </>
   );
 }

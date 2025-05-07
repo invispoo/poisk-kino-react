@@ -1,0 +1,35 @@
+.search {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.filter-button {
+  position: absolute;
+  right: 0;
+  top: 51%;
+  transform: translateY(-50%);
+
+  width: 10%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-left: 1px solid #ccc;
+}
