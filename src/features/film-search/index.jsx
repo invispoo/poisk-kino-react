@@ -9,7 +9,7 @@ const SortOptions = Object.freeze({
   OLDEST: "Сначала старые",
 });
 
-export default function FilmSearch({ films, setFilms }) {
+export default function FilmSearch({ filmsSnapshot, films, setFilms }) {
   const [selectedSort, setSelectedSort] = useState(null);
 
   function onSort(sortOption) {
@@ -32,15 +32,10 @@ export default function FilmSearch({ films, setFilms }) {
 
     if (selectedSort !== sortOption) {
       setSelectedSort(sortOption);
-
-      const sortedFilms =
-        sortOption && Array.isArray(films)
-          ? [...films].sort((a, b) => filmComparator(a, b))
-          : films;
-
-      if (Array.isArray(sortedFilms)) {
-        setFilms(sortedFilms);
-      }
+      setFilms([...films].sort((a, b) => filmComparator(a, b)));
+    } else {
+      setSelectedSort(null);
+      setFilms(filmsSnapshot);
     }
   }
 
