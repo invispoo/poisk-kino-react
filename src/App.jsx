@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <FilmSearch
-        setFilms={setFilms}
         films={films}
+        setFilms={setFilms}
       />
       <FilmList films={films} />
     </>
