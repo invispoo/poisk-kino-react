@@ -4,7 +4,7 @@ import { mdiFilterCogOutline } from "@mdi/js";
 import { useState } from "react";
 import Dropdown from "@components/dropdown";
 
-export default function Search({ sortOptions }) {
+export default function Search({ sortOptions, onSelectSort }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -23,7 +23,12 @@ export default function Search({ sortOptions }) {
           size={1}
         />
       </div>
-      {isDropdownOpen && <Dropdown options={sortOptions} />}
+      {isDropdownOpen && (
+        <Dropdown
+          options={sortOptions}
+          onSelectOption={onSelectSort}
+        />
+      )}
     </div>
   );
 }
