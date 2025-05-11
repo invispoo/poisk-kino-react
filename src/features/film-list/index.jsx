@@ -9,5 +9,13 @@ export default function FilmList({ films }) {
     />
   ));
 
-  return <div className={s.list}>{filmCards}</div>;
+  return (
+    <>
+      {filmCards.length ? (
+        <div className={s.list}>{filmCards}</div>
+      ) : (
+        <div className={s["no-films-warning"]}>Ничего не найдено</div>
+      )}
+    </>
+  );
 }

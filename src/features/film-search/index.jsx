@@ -1,5 +1,6 @@
 import Search from "@/components/search";
 import { useState } from "react";
+import s from "./FilmSearch.module.css";
 
 const SortOptions = Object.freeze({
   RATING: "Сначала с лучшей оценкой",
@@ -11,6 +12,21 @@ const SortOptions = Object.freeze({
 
 export default function FilmSearch({ filmsSnapshot, films, setFilms }) {
   const [selectedSort, setSelectedSort] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  function onSearch(e) {
+    setSearchQuery(e.target.value);
+
+    if (e.target.value) {
+      setFilms(
+        [...films].filter((film) =>
+          film.name.toLowerCase().includes(e.target.value.toLowerCase()),
+        ),
+      );
+    } else {
+      setFilms(filmsSnapshot);
+    }
+  }
 
   function onSort(sortOption) {
     function filmComparator(a, b) {
@@ -40,10 +56,14 @@ export default function FilmSearch({ filmsSnapshot, films, setFilms }) {
   }
 
   return (
-    <Search
-      selectedSort={selectedSort}
-      sortOptions={Object.values(SortOptions)}
-      onSelectSort={onSort}
-    />
+    <div className={s["film-search"]}>
+      <Search
+        searchQuery={searchQuery}
+        selectedSort={selectedSort}
+        sortOptions={Object.values(SortOptions)}
+        onSelectSort={onSort}
+        onSearchInput={onSearch}
+      />
+    </div>
   );
 }

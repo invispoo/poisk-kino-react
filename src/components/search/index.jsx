@@ -4,7 +4,13 @@ import { mdiFilterCogOutline } from "@mdi/js";
 import { useState } from "react";
 import Dropdown from "@components/dropdown";
 
-export default function Search({ selectedSort, sortOptions, onSelectSort }) {
+export default function Search({
+  searchQuery,
+  selectedSort,
+  sortOptions,
+  onSelectSort,
+  onSearchInput,
+}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -13,7 +19,11 @@ export default function Search({ selectedSort, sortOptions, onSelectSort }) {
 
   return (
     <div className={s.search}>
-      <input className={s.input} />
+      <input
+        className={s.input}
+        value={searchQuery}
+        onInput={(e) => onSearchInput(e)}
+      />
       <div
         className={s["filter-button"]}
         onClick={toggleDropdown}
