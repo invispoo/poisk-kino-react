@@ -1,5 +1,5 @@
 import Search from "@/components/search";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import s from "./FilmSearch.module.css";
 
 const SortOptions = Object.freeze({
@@ -16,21 +16,28 @@ export default function FilmSearch({ filmsSnapshot, films, setFilms }) {
 
   function onSearch(e) {
     setSearchQuery(e.target.value);
-
-    if (e.target.value) {
-      setFilms(
-        [...films].filter((film) =>
-          film.name.toLowerCase().includes(e.target.value.toLowerCase()),
-        ),
-      );
-    } else {
-      setFilms(filmsSnapshot);
-    }
+    updateFilms();
   }
 
   function onSort(sortOption) {
-    function filmComparator(a, b) {
-      switch (sortOption) {
+    if (selectedSort !== sortOption) {
+      setSelectedSort(sortOption);
+    } else {
+      setSelectedSort(null);
+    }
+    updateFilms();
+  }
+
+  const filmFilter = useCallback(
+    (film) => {
+      return searchQuery ? film.name.toLowerCase().includes(searchQuery) : true;
+    },
+    [searchQuery],
+  );
+
+  const filmComparator = useCallback(
+    (a, b) => {
+      switch (selectedSort) {
         case SortOptions.RATING:
           return b.rating.kp - a.rating.kp;
         case SortOptions.LONGEST:
@@ -44,16 +51,19 @@ export default function FilmSearch({ filmsSnapshot, films, setFilms }) {
         default:
           return 0;
       }
-    }
+    },
+    [selectedSort],
+  );
 
-    if (selectedSort !== sortOption) {
-      setSelectedSort(sortOption);
-      setFilms([...films].sort((a, b) => filmComparator(a, b)));
-    } else {
-      setSelectedSort(null);
-      setFilms(filmsSnapshot);
-    }
-  }
+  const updateFilms = useCallback(() => {
+    setFilms(
+      filmsSnapshot
+        .filter((film) => filmFilter(film))
+        .sort((a, b) => filmComparator(a, b)),
+    );
+  }, [filmComparator, filmFilter, filmsSnapshot, setFilms]);
+
+  useEffect(() => updateFilms(), [searchQuery, selectedSort, updateFilms]);
 
   return (
     <div className={s["film-search"]}>
