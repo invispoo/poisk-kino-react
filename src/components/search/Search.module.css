@@ -1,35 +1,70 @@
 .search {
   position: relative;
   margin-bottom: 2rem;
+  display: flex;
+  width: 100%;
 }
 
 .input {
-  width: 100%;
-  border: none;
-  padding: 0.6rem;
+  width: 90%;
+  border-color: transparent;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
   box-sizing: border-box;
   transition: all 0.3s ease;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.input:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .input:focus {
   outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
 }
 
 .filter-button {
-  position: absolute;
-  right: 0;
-  top: 51%;
-  transform: translateY(-50%);
-
   width: 10%;
-  height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: none;
+  background: #D5FF0C;
   border: none;
   cursor: pointer;
-  border-left: 1px solid #ccc;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: black;
+  transition: 0.5s;
+}
+
+.filter-button:hover::before {
+  left: 0;
+}
+
+.filter-button svg {
+  position: relative;
+  z-index: 1;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.filter-button:hover svg {
+  color: white;
+}
+
+.filter-button:active {
+  background: #333;
 }
