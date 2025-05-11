@@ -13,8 +13,6 @@ export default function FilmSearch({ films, setFilms }) {
   const [selectedSort, setSelectedSort] = useState(null);
 
   function onSort(sortOption) {
-    setSelectedSort(sortOption);
-
     function filmComparator(a, b) {
       switch (sortOption) {
         case SortOptions.RATING:
@@ -32,13 +30,17 @@ export default function FilmSearch({ films, setFilms }) {
       }
     }
 
-    const sortedFilms =
-      sortOption && Array.isArray(films)
-        ? [...films].sort((a, b) => filmComparator(a, b))
-        : films;
+    if (selectedSort !== sortOption) {
+      setSelectedSort(sortOption);
 
-    if (Array.isArray(sortedFilms)) {
-      setFilms(sortedFilms);
+      const sortedFilms =
+        sortOption && Array.isArray(films)
+          ? [...films].sort((a, b) => filmComparator(a, b))
+          : films;
+
+      if (Array.isArray(sortedFilms)) {
+        setFilms(sortedFilms);
+      }
     }
   }
 
